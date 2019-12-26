@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 mt-5">     
+      <div class="mx-auto mt-5" style="width: 400px">
+        <%= form_with(url: add_path, method: 'post', local: true) do %>
+          <div class="form-group">
+            <%= label_tag :cpf, 'CPF'%>
+            <%= text_field_tag :cpf, nil, placeholder: 'Ex. 12345678901', class: 'form-control' %>
+            <%= label_tag :name, 'Nome'%>
+            <%= text_field_tag :name, nil, placeholder: 'Ex. João da Silva', class: 'form-control' %>
+            <%= label_tag :email, 'E-mail'%>
+            <%= text_field_tag :email, nil, placeholder: 'Ex. teste@teste.com', class: 'form-control' %>           
+          </div>          
+          <%= button_tag 'Adicionar Cliente', class: 'btn btn-success btn-block' %>          
+        <% end %>
+      </div>
+      <br>
+      <% if flash[:notice] %>
+        <center><p id="notice"><font color="red"><%= flash[:notice] %></font></p></center>
+      <% end %>
+      <div class="mx-auto mt-5" style="width: 400px">
+        <%= form_with(url: create_path, method: 'post', local: true) do %>
+          <div class="form-group">
+            <%= label_tag :device_model, 'Modelo do aparelho'%>
+            <%= text_field_tag :device_model, nil, placeholder: 'Ex. Iphone 8', class: 'form-control' %>
+            <%= label_tag :imei, 'IMEI'%>
+            <%= text_field_tag :imei, nil, placeholder: 'Ex. 123456789012345', class: 'form-control' %>
+            <%= label_tag :annual_price, 'Valor Anual'%>
+            <%= text_field_tag :annual_price, nil, placeholder: 'Ex. 123.45', class: 'form-control' %>
+            <%= label_tag :installment_no, 'Número de Prestações'%>
+            <%= text_field_tag :installment_no, nil, placeholder: 'Ex. 12', class: 'form-control' %>
+            <%= label_tag :user_id, 'Cliente'%><br>
+            <select name="user_id">   
+              <option value="">[SELECIONE]</option>
+              <% if session[:users] %>            
+                <% session[:users].each do |user| %>
+                <option value="<%=user['id']%>">               
+                  <%= user['name'] %>              
+                </option>      
+                <% end %>     
+              <% end %>
+            <select>
+          </div>          
+          <%= button_tag 'Adicionar Assinatura', class: 'btn btn-success btn-block' %>
+        <% end %>        
+      </div>
+    </div>
+  </div>
+</div>
